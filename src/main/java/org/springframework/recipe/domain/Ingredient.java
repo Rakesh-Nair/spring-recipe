@@ -23,6 +23,28 @@ public class Ingredient {
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure unit;
 
+	public Ingredient() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Ingredient(Long id, String description, BigDecimal amount, Recipe recipe, UnitOfMeasure unit) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.amount = amount;
+		this.recipe = recipe;
+		this.unit = unit;
+	}
+
+	public Ingredient(String description, BigDecimal amount, UnitOfMeasure unit, Recipe recipe) {
+		super();
+		this.description = description;
+		this.amount = amount;
+		this.unit = unit;
+		this.recipe = recipe;
+	}
+
 	/**
 	 * @return the description
 	 */

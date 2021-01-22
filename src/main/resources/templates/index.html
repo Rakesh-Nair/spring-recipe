@@ -9,7 +9,16 @@
 
   <body>
   
-    <p th:text="India">Welcome to our grocery store!</p>
+   <table>
+   <tr>
+   <th>ID</th>
+   <th>Description</th>
+   </tr>
+   <tr th:each="recipe:${recipes}">
+   <td th:text="${recipe.id}"></td>
+   <td th:text="${recipe.description}"></td>
+   </tr>
+   </table>
   
   </body>
 
