@@ -10,7 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@EqualsAndHashCode(exclude = { "recipe" })
 public class Ingredient {
 
 	@Id
@@ -23,96 +32,10 @@ public class Ingredient {
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure unit;
 
-	public Ingredient() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Ingredient(String string, BigDecimal bigDecimal, UnitOfMeasure eachUom, Recipe guacRecipe) {
+		this.description = string;
+		this.amount = bigDecimal;
+		this.unit = eachUom;
+		this.recipe = guacRecipe;
 	}
-
-	public Ingredient(Long id, String description, BigDecimal amount, Recipe recipe, UnitOfMeasure unit) {
-		super();
-		this.id = id;
-		this.description = description;
-		this.amount = amount;
-		this.recipe = recipe;
-		this.unit = unit;
-	}
-
-	public Ingredient(String description, BigDecimal amount, UnitOfMeasure unit, Recipe recipe) {
-		super();
-		this.description = description;
-		this.amount = amount;
-		this.unit = unit;
-		this.recipe = recipe;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * @return the amount
-	 */
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	/**
-	 * @param amount the amount to set
-	 */
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the recipe
-	 */
-	public Recipe getRecipe() {
-		return recipe;
-	}
-
-	/**
-	 * @param recipe the recipe to set
-	 */
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
-
-	/**
-	 * @return the unit
-	 */
-	public UnitOfMeasure getUnit() {
-		return unit;
-	}
-
-	/**
-	 * @param unit the unit to set
-	 */
-	public void setUnit(UnitOfMeasure unit) {
-		this.unit = unit;
-	}
-
 }

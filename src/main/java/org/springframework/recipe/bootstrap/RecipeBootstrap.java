@@ -17,20 +17,18 @@ import org.springframework.recipe.repository.CategoryRepository;
 import org.springframework.recipe.repository.RecipeRepository;
 import org.springframework.recipe.repository.UnitOfMeasureRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
+@AllArgsConstructor
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	private final CategoryRepository categoryRepository;
 	private final RecipeRepository recipeRepository;
 	private final UnitOfMeasureRepository unitOfMeasureRepository;
-
-	public RecipeBootstrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository,
-			UnitOfMeasureRepository unitOfMeasureRepository) {
-		super();
-		this.categoryRepository = categoryRepository;
-		this.recipeRepository = recipeRepository;
-		this.unitOfMeasureRepository = unitOfMeasureRepository;
-	}
 
 	private List<Recipe> getRecipes() {
 		List<Recipe> recipes = new ArrayList<>();
@@ -148,8 +146,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	}
 
 	@Override
+	@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		List<Recipe> recipes = getRecipes();
+		log.debug("Loading Bootstrap");
 		recipeRepository.saveAll(recipes);
 	}
 }
